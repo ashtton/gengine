@@ -1,6 +1,7 @@
 package me.gleeming.gengine.animation;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.gleeming.gengine.resource.Resource;
 
 import java.util.Arrays;
@@ -10,8 +11,10 @@ import java.util.List;
 public class Animation {
     @Getter private final int fps;
     @Getter private final List<Resource> resources;
-    @Getter private Resource currentFrame;
+    @Getter @Setter private boolean paused;
 
+    private long lastRequest;
+    private Resource currentFrame;
     private Iterator<Resource> resourceIterator;
     public Animation(int fps, Resource... resources) {
         this.fps = fps;
@@ -21,18 +24,26 @@ public class Animation {
         start();
     }
 
+    public Resource getCurrentFrame() {
+        this.lastRequest = System.currentTimeMillis();
+        return currentFrame;
+    }
+
     private void start() {
-        new Thread() {
-            public void run() {
-                while(true) {
+        new Thread(() -> {
+            while(true) {
+                if(System.currentTimeMillis() - lastRequest > 1000) {
+                    if(!paused) resourceIterator = resources.iterator();
+                    paused = true;
+                } else {
                     if(!resourceIterator.hasNext()) resourceIterator = resources.iterator();
 
-                   currentFrame = resourceIterator.next();
+                    currentFrame = resourceIterator.next();
 
-                   try { Thread.sleep(1000 / fps); } catch(Exception ex) { ex.printStackTrace(); }
+                    try { Thread.sleep(1000 / fps); } catch(Exception ex) { ex.printStackTrace(); }
                 }
             }
-        }.start();
+        }).start();
     }
 
 }
