@@ -18,7 +18,7 @@ public class Gengine {
     @Getter private final int width;
     @Getter private final int height;
 
-    @Getter @Setter private GengineScreen currentScreen;
+    @Getter private GengineScreen currentScreen;
     public Gengine(String windowName, Resource windowImage, int width, int height) {
         instance = this;
 
@@ -33,4 +33,6 @@ public class Gengine {
         new GengineCamera();
         new GameLoop();
     }
+
+    public void changeScreen(GengineScreen screen) { this.currentScreen = screen; }
 }

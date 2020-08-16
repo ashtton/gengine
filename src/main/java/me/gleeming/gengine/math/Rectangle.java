@@ -3,6 +3,7 @@ package me.gleeming.gengine.math;
 import lombok.Getter;
 
 public class Rectangle {
+    //idea: add a collision LISTENER
     @Getter private final int width;
     @Getter private final int height;
 
