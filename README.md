@@ -1,7 +1,7 @@
 ## Gengine
 
 **NOTICE:**\
-*Gengine is currently under heavy development, and even more features will be coming in the near future*
+*Gengine is currently under heavy development, and even more features will be coming in the near future*\
 *Gengine is also currently a private library, requiring authentication to request from the maven repository.*
 \
 \
