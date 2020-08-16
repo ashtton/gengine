@@ -9,7 +9,7 @@
 Welcome to [Gengine](http://github.com/GleemingKnight/gengine), a modern 2D game library supporting a multitude of features.\
 \
 Gengine was made by game developers for game developers, which means it has all the features you wish other frameworks had,
-without the features you wish they didn't have. Gengine is made of pure java, not using any build libraries, which makes it lightweight.\
+without the features you wish they didn't have. Gengine is made of pure java, not using any build libraries, which makes it extremely lightweight.\
 \
 **Setting up your project**\
 \
