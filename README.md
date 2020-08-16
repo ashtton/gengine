@@ -42,7 +42,7 @@ compile(group: 'me.gleeming.gengine', name: 'gengine', version: '1.0-20200815.04
 \
 \
 **Creating the main class**\
-The main class must extend ```Gengine2DGame```, then you can create your first screen.
+The main class must extend ```Gengine2DGame```, within this class you will create your first screen.
 ```java
 public class TestGame extends Gengine2DGame {
     public TestGame() {
