@@ -51,7 +51,7 @@ public class TestGame extends Gengine2DGame {
         super("Test Game (1.0-SNAPSHOT)", new Resource("path-to-window-icon"), width, height);
         
         /*
-            The next step in creating a game using gengine, is to define the first screen.
+            The next step when creating a game using gengine, is to define the first screen.
             In this tutorial, we will be using a MenuScreen.
         */
         Gengine.getInstance().changeScreen(new MainMenuScreen());
