@@ -2,7 +2,8 @@
 
 **NOTICE:**\
 *Gengine is currently under heavy development, and even more features will be coming in the near future*\
-*Gengine is also currently a private library, requiring authentication to request from the maven repository.*
+*Gengine is also currently a private library, requiring authentication to request from the maven repository.*\
+*If you are a game developer wishing to use **Gengine**, contact Gleeming#0001 on discord.*
 \
 \
 Welcome to [Gengine](http://github.com/GleemingKnight/gengine), a modern 2D game library supporting a multitude of features.\
