@@ -60,7 +60,7 @@ public class TestGame extends Gengine2DGame {
 ```
 \
 **Creating the main menu screen**\
-The main menu screen will be using a background image, along with buttons to start the game\
+The main menu screen will be using a background image, along with buttons to start the game.
 ```java
 public class MainMenuScreen extends MenuScreen {
     public MainMenuScreen() {
