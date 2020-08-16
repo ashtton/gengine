@@ -254,6 +254,5 @@ if(rect1.colliding(rect2)) {
 }
 ```
 \
-These are all of the main features that gengine currently has,\
-this page will be updated when more compact and better features are added to gengine.\
-\
+*These are all of the main features that gengine currently has*,\
+*this page will be updated when more compact and better features are added to gengine.*\
