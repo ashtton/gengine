@@ -4,12 +4,14 @@ import lombok.Getter;
 import me.gleeming.gengine.Gengine;
 import me.gleeming.gengine.camera.GengineCamera;
 import me.gleeming.gengine.input.GengineInput;
+import me.gleeming.gengine.math.Rectangle;
+import me.gleeming.gengine.screen.menu.MenuScreen;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class GameLoop extends Frame implements MouseListener, KeyListener {
+public class GameLoop extends Frame implements MouseListener, MouseMotionListener, KeyListener {
     @Getter private static GameLoop instance;
 
     private final Graphics bufferGraphics;
@@ -22,7 +24,10 @@ public class GameLoop extends Frame implements MouseListener, KeyListener {
         setVisible(true);
         setResizable(false);
 
+        setLocation((int) (getToolkit().getScreenSize().getWidth() - getWidth()) / 2, (int) (getToolkit().getScreenSize().getHeight() - getHeight()) / 2);
+
         addMouseListener(this);
+        addMouseMotionListener(this);
         addKeyListener(this);
 
         offscreen = createImage(getWidth(),getHeight());
@@ -65,12 +70,29 @@ public class GameLoop extends Frame implements MouseListener, KeyListener {
     }
 
     public void keyPressed(KeyEvent e) { GengineInput.getInstance().getPressedHashMap().put(translateKeyboard(String.valueOf(e.getKeyChar())), true); }
-
     public void keyReleased(KeyEvent e) { GengineInput.getInstance().getPressedHashMap().put(translateKeyboard(String.valueOf(e.getKeyChar())), false); }
-
-    public void mousePressed(MouseEvent e) { GengineInput.getInstance().getPressedHashMap().put(translateMouse(String.valueOf(e.getButton())), true); }
-
     public void mouseReleased(MouseEvent e) { GengineInput.getInstance().getPressedHashMap().put(translateMouse(String.valueOf(e.getButton())), false); }
+
+    public void mousePressed(MouseEvent e) {
+        if(Gengine.getInstance().getCurrentScreen() != null && Gengine.getInstance().getCurrentScreen() instanceof MenuScreen) {
+            Rectangle mouseRect = new Rectangle(e.getX(), e.getY(), 5, 5);
+            ((MenuScreen) Gengine.getInstance().getCurrentScreen()).getButtons().forEach(button -> {
+                if(button.getRectangle().colliding(mouseRect)) button.getListeners().forEach(listener -> listener.buttonClick());
+            });
+        }
+
+        GengineInput.getInstance().getPressedHashMap().put(translateMouse(String.valueOf(e.getButton())), true);
+    }
+
+    public void mouseMoved(MouseEvent e) {
+        if(Gengine.getInstance().getCurrentScreen() != null && Gengine.getInstance().getCurrentScreen() instanceof MenuScreen) {
+            Rectangle mouseRect = new Rectangle(e.getX(), e.getY(), 5, 5);
+            ((MenuScreen) Gengine.getInstance().getCurrentScreen()).getButtons().forEach(button -> {
+                if(button.getRectangle().colliding(mouseRect)) button.setHovering(true);
+                else if(button.isHovering()) button.setHovering(false);
+            });
+        }
+    }
 
     public String translateKeyboard(String s) {
         if(s.equals(" ")) return "space";
@@ -94,6 +116,10 @@ public class GameLoop extends Frame implements MouseListener, KeyListener {
         }
     }
 
+
+
+
+    public void mouseDragged(MouseEvent e) { }
     public void mouseClicked(MouseEvent e) { }
     public void mouseEntered(MouseEvent e) { }
     public void mouseExited(MouseEvent e) { }

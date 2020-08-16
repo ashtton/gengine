@@ -3,7 +3,6 @@ package me.gleeming.gengine.draw.type;
 import lombok.Getter;
 import lombok.Setter;
 import me.gleeming.gengine.draw.DrawQueue;
-import me.gleeming.gengine.loop.GameLoop;
 import me.gleeming.gengine.resource.Resource;
 
 import java.awt.*;

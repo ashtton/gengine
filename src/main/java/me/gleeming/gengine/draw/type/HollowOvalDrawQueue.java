@@ -2,7 +2,6 @@ package me.gleeming.gengine.draw.type;
 
 import lombok.Getter;
 import me.gleeming.gengine.draw.DrawQueue;
-import me.gleeming.gengine.loop.GameLoop;
 
 import java.awt.*;
 

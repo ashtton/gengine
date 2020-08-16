@@ -7,6 +7,7 @@ import me.gleeming.gengine.input.GengineInput;
 import me.gleeming.gengine.loop.GameLoop;
 import me.gleeming.gengine.resource.Resource;
 import me.gleeming.gengine.screen.GengineScreen;
+import me.gleeming.gengine.sound.GengineSoundEngine;
 
 public class Gengine {
     @Getter private static Gengine instance;
@@ -27,6 +28,7 @@ public class Gengine {
         this.width = width;
         this.height = height;
 
+        new GengineSoundEngine();
         new GengineInput();
         new GengineCamera();
         new GameLoop();
