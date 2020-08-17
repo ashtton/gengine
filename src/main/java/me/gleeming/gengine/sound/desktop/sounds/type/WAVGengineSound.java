@@ -1,6 +1,6 @@
-package me.gleeming.gengine.sound.sounds.type;
+package me.gleeming.gengine.sound.desktop.sounds.type;
 
-import me.gleeming.gengine.sound.sounds.GengineSound;
+import me.gleeming.gengine.sound.desktop.sounds.GengineSound;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

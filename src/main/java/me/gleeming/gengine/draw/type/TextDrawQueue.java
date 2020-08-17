@@ -1,10 +1,12 @@
 package me.gleeming.gengine.draw.type;
 
 import lombok.Getter;
+import me.gleeming.gengine.Gengine;
 import me.gleeming.gengine.draw.DrawQueue;
 import me.gleeming.gengine.font.GengineFont;
 import me.gleeming.gengine.font.type.AWTGengineFont;
-import me.gleeming.gengine.loop.GameLoop;
+import me.gleeming.gengine.game.provider.type.DesktopProvider;
+import me.gleeming.gengine.loop.types.DesktopGameLoop;
 
 import java.awt.*;
 
@@ -27,7 +29,7 @@ public class TextDrawQueue implements DrawQueue {
         this.string = string;
         this.x = x;
         this.y = y;
-        this.font = new AWTGengineFont(GameLoop.getInstance().getFont().deriveFont(Font.PLAIN, size));
+        this.font = new AWTGengineFont(DesktopProvider.getGameLoop().getFont().deriveFont(Font.PLAIN, size));
     }
 
 

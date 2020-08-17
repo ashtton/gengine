@@ -1,4 +1,4 @@
-package me.gleeming.gengine.sound.sounds;
+package me.gleeming.gengine.sound.desktop.sounds;
 
 import lombok.Getter;
 import lombok.Setter;

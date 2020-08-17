@@ -26,7 +26,7 @@ public abstract class MenuScreen extends GengineScreen {
     public void draw(DrawQueue queue) { this.drawQueues.add(queue); }
 
     public List<DrawQueue> draw(List<DrawQueue> queued) {
-        queued.add(new ResourceDrawQueue(backgroundAnimation.getCurrentFrame(), 0, 0, Gengine.getInstance().getWidth(), Gengine.getInstance().getHeight()));
+        queued.add(new ResourceDrawQueue(backgroundAnimation.getCurrentFrame(), 0, 0, Gengine.getInstance().getGameProvider().getWidth(), Gengine.getInstance().getGameProvider().getHeight()));
         queued.addAll(drawQueues);
         buttons.forEach(button -> queued.add(new ResourceDrawQueue((button.isHovering() ? button.getHoveredResource() : button.getResource()), button.getX(), button.getY(), button.getWidth(), button.getHeight())));
 
