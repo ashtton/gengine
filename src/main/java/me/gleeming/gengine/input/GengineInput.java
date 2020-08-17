@@ -1,6 +1,8 @@
 package me.gleeming.gengine.input;
 
 import lombok.Getter;
+import me.gleeming.gengine.loop.GameLoop;
+import me.gleeming.gengine.math.Point;
 
 import java.util.HashMap;
 
@@ -13,6 +15,10 @@ public class GengineInput {
     }
 
     public boolean isPressed(Key key) { return pressedHashMap.get(key.getActualStroke().toLowerCase()) == null ? false : pressedHashMap.get(key.getActualStroke().toLowerCase()); }
+
+    public Point getMouseLocation() {
+        return new Point((int) GameLoop.getInstance().getMousePosition().getX(), (int) GameLoop.getInstance().getMousePosition().getY());
+    }
 
     public enum Key {
         NUM1("1"), NUM2("2"), NUM3("3"), NUM4("4"), NUM5("5"), NUM6("6"), NUM7("7"), NUM8("8"), NUM9("9"), NUM10("10"), NUM0("0"), TAB, CAPS_LOCK, LEFT_SHIFT, RIGHT_SHIFT,

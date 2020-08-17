@@ -5,13 +5,13 @@
                       https://maven.apache.org/xsd/settings-1.0.0.xsd">
     <servers>
         <server>
-            <username>acidviper</username>
-            <password>d0tjarisfat4231</password>
+            <username>gleeming</username>
+            <password>1Jashton</password>
             <id>central</id>
         </server>
         <server>
-            <username>acidviper</username>
-            <password>d0tjarisfat4231</password>
+            <username>gleeming</username>
+            <password>1Jashton</password>
             <id>snapshots</id>
         </server>
     </servers>
