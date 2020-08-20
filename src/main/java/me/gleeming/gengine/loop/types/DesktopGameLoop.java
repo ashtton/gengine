@@ -1,22 +1,26 @@
 package me.gleeming.gengine.loop.types;
 
+import lombok.Getter;
 import me.gleeming.gengine.Gengine;
-import me.gleeming.gengine.camera.GengineCamera;
+import me.gleeming.gengine.camera.effect.CameraEffect;
+import me.gleeming.gengine.draw.DrawQueue;
 import me.gleeming.gengine.game.provider.type.DesktopProvider;
-import me.gleeming.gengine.input.type.GengineDesktopInput;
 import me.gleeming.gengine.loop.GameLoop;
 import me.gleeming.gengine.math.Rectangle;
-import me.gleeming.gengine.resource.Resource;
+import me.gleeming.gengine.resource.type.DesktopResource;
 import me.gleeming.gengine.screen.menu.MenuScreen;
+import me.gleeming.gengine.screen.menu.button.Button;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 public class DesktopGameLoop extends Frame implements MouseListener, MouseMotionListener, KeyListener, GameLoop {
+    @Getter private static Graphics2D drawTo;
+
     private final Graphics bufferGraphics;
     private final Image offscreen;
-    public DesktopGameLoop(int width, int height, Resource windowImage, String windowName) {
+    public DesktopGameLoop(int width, int height, DesktopResource windowImage, String windowName) {
         setSize(width, height);
         setTitle(windowName);
         setVisible(true);
@@ -37,32 +41,40 @@ public class DesktopGameLoop extends Frame implements MouseListener, MouseMotion
             }
         });
 
-        new Thread(() -> {
-            while(true) {
-                repaint();
-                try { Thread.sleep(17); } catch(Exception ex) { ex.printStackTrace(); }
+        new Thread() {
+            public void run() {
+                while (true) {
+                    repaint();
+                    try { Thread.sleep(17); } catch (Exception ex) { ex.printStackTrace(); }
+                }
             }
-        }).start();
+        }.start();
     }
 
-    public void update(Graphics g) { this.paint(g); }
+    public void update(Graphics g) {
+        this.paint(g);
+
+        for (CameraEffect cameraEffect : new ArrayList<>(Gengine.getInstance().getCamera().getCurrentEffeects())) cameraEffect.update();
+    }
 
     public void paint(Graphics g) {
         bufferGraphics.clearRect(0,0, getWidth(), getHeight());
 
         if(Gengine.getInstance() == null || Gengine.getInstance().getCurrentScreen() == null) return;
 
-        Gengine.getInstance().getCurrentScreen().draw(new ArrayList<>()).forEach(queue -> {
+        for (DrawQueue queue : Gengine.getInstance().getCurrentScreen().draw(new ArrayList<>())) {
             int cameraX = DesktopProvider.getCamera().getX();
             int cameraY = DesktopProvider.getCamera().getY();
 
             int gameWidth = Gengine.getInstance().getGameProvider().getWidth();
             int gameHeight = Gengine.getInstance().getGameProvider().getHeight();
 
+            drawTo = (Graphics2D) bufferGraphics;
+
             if(queue.getX() + queue.getWidth() >= cameraX && cameraX + gameWidth >= queue.getX() - queue.getWidth() && queue.getY() + queue.getHeight() >= cameraY && cameraY + gameHeight >= queue.getY()) {
-                queue.draw((Graphics2D) bufferGraphics, queue.getX() + cameraX, queue.getY() + cameraY);
+                queue.draw(queue.getX() + cameraX, queue.getY() + cameraY);
             }
-        });
+        }
 
         g.drawImage(offscreen,0,0,this);
     }
@@ -74,9 +86,9 @@ public class DesktopGameLoop extends Frame implements MouseListener, MouseMotion
     public void mousePressed(MouseEvent e) {
         if(Gengine.getInstance().getCurrentScreen() != null && Gengine.getInstance().getCurrentScreen() instanceof MenuScreen) {
             Rectangle mouseRect = new Rectangle(e.getX(), e.getY(), 5, 5);
-            ((MenuScreen) Gengine.getInstance().getCurrentScreen()).getButtons().forEach(button -> {
-                if(button.getRectangle().colliding(mouseRect)) button.getListeners().forEach(listener -> listener.buttonClick());
-            });
+            for (Button button : ((MenuScreen) Gengine.getInstance().getCurrentScreen()).getButtons()) {
+                if(button.getRectangle().colliding(mouseRect)) for (Button.Listener listener : button.getListeners()) listener.buttonClick();
+            }
         }
 
         DesktopProvider.getInput().getPressedHashMap().put(translateMouse(String.valueOf(e.getButton())), true);
@@ -85,10 +97,10 @@ public class DesktopGameLoop extends Frame implements MouseListener, MouseMotion
     public void mouseMoved(MouseEvent e) {
         if(Gengine.getInstance().getCurrentScreen() != null && Gengine.getInstance().getCurrentScreen() instanceof MenuScreen) {
             Rectangle mouseRect = new Rectangle(e.getX(), e.getY(), 5, 5);
-            ((MenuScreen) Gengine.getInstance().getCurrentScreen()).getButtons().forEach(button -> {
+            for (Button button : ((MenuScreen) Gengine.getInstance().getCurrentScreen()).getButtons()) {
                 if(button.getRectangle().colliding(mouseRect)) button.setHovering(true);
                 else if(button.isHovering()) button.setHovering(false);
-            });
+            }
         }
     }
 
@@ -113,9 +125,6 @@ public class DesktopGameLoop extends Frame implements MouseListener, MouseMotion
                 return "mouse-six";
         }
     }
-
-
-
 
     public void mouseDragged(MouseEvent e) { }
     public void mouseClicked(MouseEvent e) { }

@@ -1,9 +1,13 @@
 package me.gleeming.gengine.draw.type;
 
 import lombok.Getter;
+import me.gleeming.gengine.Gengine;
+import me.gleeming.gengine.color.GengineColor;
 import me.gleeming.gengine.draw.DrawQueue;
-
-import java.awt.*;
+import me.gleeming.gengine.draw.type.android.*;
+import me.gleeming.gengine.draw.type.desktop.*;
+import me.gleeming.gengine.game.provider.type.AndroidProvider;
+import me.gleeming.gengine.game.provider.type.DesktopProvider;
 
 public class HollowOvalDrawQueue implements DrawQueue {
     @Getter private final int x;
@@ -12,8 +16,8 @@ public class HollowOvalDrawQueue implements DrawQueue {
     @Getter private final int width;
     @Getter private final int height;
 
-    @Getter private final Color color;
-    public HollowOvalDrawQueue(int x, int y, int width, int height, Color color) {
+    @Getter private final GengineColor color;
+    public HollowOvalDrawQueue(int x, int y, int width, int height, GengineColor color) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -21,8 +25,8 @@ public class HollowOvalDrawQueue implements DrawQueue {
         this.color = color;
     }
 
-    public void draw(Graphics2D graphics2D, int x, int y) {
-        graphics2D.setColor(color);
-        graphics2D.drawOval(x, y, width, height);
+    public void draw(int x, int y) {
+        if(Gengine.getInstance().getGameProvider() instanceof DesktopProvider) new CreateOvalDesktop(x, y, width, height, color, false);
+        else if(Gengine.getInstance().getGameProvider() instanceof AndroidProvider) new CreateOvalAndroid(x, y, width, height, color, false);
     }
 }

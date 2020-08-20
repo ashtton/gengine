@@ -22,8 +22,8 @@ public class GengineDesktopInput implements GengineInput {
         LEFT_CNTRL, LEFT_ALT, RIGHT_ALT, RIGHT_CONTROL, ENTER, BACK_SLASH, FORWARD_SLASH, LEFT_BRACKET, RIGHT_BRACKET,
         LEFT_CURLY_BRACKET, RIGHT_CURLY_BRACKET, DOWN_SLASH, EQUALS, PLUS, UNDERSCORE, HYPHEN, INSERT, HOME, PAGE_DOWN,
         DELETE, END, PAGE_UP, PAUSE_BREAK, SCREEN_LOCK, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, A, B, C, D, E,
-        F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, LEFT_CLICK("left_click"), RIGHT_CLICK("right_click"), MIDDLE_CLICK("middle_click"),
-        MOUSE_FOUR("mouse_four"), MOUSE_FIVE("mouse_five"), MOUSE_SIX("mouse_six"), SPACE;
+        F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, LEFT_CLICK("left-click"), RIGHT_CLICK("right-click"), MIDDLE_CLICK("middle-click"),
+        MOUSE_FOUR("mouse-four"), MOUSE_FIVE("mouse-five"), MOUSE_SIX("mouse-six"), SPACE;
 
         @Getter private final String actualStroke;
         Key(String actualStroke) {

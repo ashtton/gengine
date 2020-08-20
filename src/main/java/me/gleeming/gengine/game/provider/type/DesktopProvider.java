@@ -6,15 +6,15 @@ import me.gleeming.gengine.camera.GengineCamera;
 import me.gleeming.gengine.game.provider.GameProvider;
 import me.gleeming.gengine.input.type.GengineDesktopInput;
 import me.gleeming.gengine.loop.types.DesktopGameLoop;
-import me.gleeming.gengine.resource.Resource;
+import me.gleeming.gengine.resource.type.DesktopResource;
 import me.gleeming.gengine.sound.desktop.DesktopSoundEngine;
 
 public class DesktopProvider implements GameProvider {
     @Getter private final String windowName;
-    @Getter private final Resource windowImage;
+    @Getter private final DesktopResource windowImage;
     @Getter private final int width;
     @Getter private final int height;
-    public DesktopProvider(String windowName, Resource windowImage, int width, int height) {
+    public DesktopProvider(String windowName, DesktopResource windowImage, int width, int height) {
         this.windowName = windowName;
         this.windowImage = windowImage;
         this.width = width;

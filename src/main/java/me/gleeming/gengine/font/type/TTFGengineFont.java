@@ -8,6 +8,7 @@ import java.awt.*;
 public class TTFGengineFont extends GengineFont {
     public TTFGengineFont(String path) {
         try {
+            setPath(path);
             setFont(Font.createFont(Font.TRUETYPE_FONT, Gengine.getInstance().getClass().getResourceAsStream(path.startsWith("/") ? path : "/" + path)));
         } catch(Exception ex) { ex.printStackTrace(); System.out.println("[Gengine] Error while loading font from '" + path + "'"); }
     }

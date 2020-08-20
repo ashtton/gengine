@@ -3,14 +3,14 @@ package me.gleeming.gengine.screen.menu.button;
 import lombok.Getter;
 import lombok.Setter;
 import me.gleeming.gengine.math.Rectangle;
-import me.gleeming.gengine.resource.Resource;
+import me.gleeming.gengine.resource.type.DesktopResource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Button {
-    @Getter private final Resource resource;
-    @Getter private final Resource hoveredResource;
+    @Getter private final DesktopResource resource;
+    @Getter private final DesktopResource hoveredResource;
 
     @Getter private final int x;
     @Getter private final int y;
@@ -20,7 +20,7 @@ public class Button {
 
     @Getter private final List<Listener> listeners = new ArrayList<>();
     @Getter @Setter private boolean hovering;
-    public Button(Resource resource, Resource hoveredResource, int x, int y, int width, int height) {
+    public Button(DesktopResource resource, DesktopResource hoveredResource, int x, int y, int width, int height) {
         this.resource = resource;
         this.hoveredResource = hoveredResource;
 
@@ -31,7 +31,7 @@ public class Button {
         this.height = height;
     }
 
-    public Button(Resource resource, int x, int y, int width, int height) { this(resource, resource, x, y, width, height); }
+    public Button(DesktopResource resource, int x, int y, int width, int height) { this(resource, resource, x, y, width, height); }
     public Button addListener(Listener listener) { listeners.add(listener); return this; }
     public Rectangle getRectangle() { return new Rectangle(x, y, width, height); }
 

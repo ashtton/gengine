@@ -5,5 +5,5 @@ import me.gleeming.gengine.font.GengineFont;
 import java.awt.*;
 
 public class AWTGengineFont extends GengineFont {
-    public AWTGengineFont(Font font) { setFont(font); }
+    public AWTGengineFont(Font font) { setFont(font); setPath("null"); }
 }

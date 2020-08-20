@@ -1,43 +1,37 @@
 package me.gleeming.gengine.draw.type;
 
 import lombok.Getter;
-import lombok.Setter;
+import me.gleeming.gengine.Gengine;
+import me.gleeming.gengine.color.GengineColor;
 import me.gleeming.gengine.draw.DrawQueue;
+import me.gleeming.gengine.draw.type.android.*;
+import me.gleeming.gengine.draw.type.desktop.*;
+import me.gleeming.gengine.game.provider.type.AndroidProvider;
+import me.gleeming.gengine.game.provider.type.DesktopProvider;
 import me.gleeming.gengine.resource.Resource;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 public class ResourceDrawQueue implements DrawQueue {
-    @Getter private final BufferedImage bufferedImage;
+    @Getter private final Resource resource;
 
     @Getter private final int x;
     @Getter private final int y;
     @Getter private final int width;
     @Getter private final int height;
 
-    @Getter private Color color;
-    @Getter private float xScale;
-    @Getter private float yScale;
+    @Getter private GengineColor color;
     public ResourceDrawQueue(Resource resource, int x, int y, int width, int height) {
-        this.bufferedImage = resource.getBufferedImage();
+        this.resource = resource;
+
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
     }
 
-    public ResourceDrawQueue setColor(Color color) { this.color = color; return this; }
+    public ResourceDrawQueue setColor(GengineColor color) { this.color = color; return this; }
 
-//    public ResourceDrawQueue setScale(float xScale, float yScale) { this.xScale = xScale; this.yScale = yScale; return this; }
-//    public ResourceDrawQueue setScale(float scale) { this.xScale = scale; this.yScale = scale; return this; }
-
-    public void draw(Graphics2D graphics2D, int x, int y) {
-        if(color != null) graphics2D.setColor(color);
-        if(xScale != 0 || yScale != 0) graphics2D.scale(xScale, yScale);
-
-        graphics2D.drawImage(bufferedImage, x, y, width, height, null);
-
-        if(xScale != 0 || yScale != 0) graphics2D.scale(-xScale, -yScale);
+    public void draw(int x, int y) {
+        if(Gengine.getInstance().getGameProvider() instanceof DesktopProvider) new CreateImageDesktop(color, x, y, width, height, resource);
+        else if(Gengine.getInstance().getGameProvider() instanceof AndroidProvider) new CreateImageAndroid(x, y, resource, color);
     }
 }

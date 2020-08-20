@@ -2,7 +2,6 @@ package me.gleeming.gengine.game;
 
 import me.gleeming.gengine.Gengine;
 import me.gleeming.gengine.game.provider.GameProvider;
-import me.gleeming.gengine.resource.Resource;
 
 public abstract class Gengine2DGame {
     public Gengine2DGame(GameProvider provider) {
