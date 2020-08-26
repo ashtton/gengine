@@ -50,10 +50,10 @@ public class Gengine {
     }
 
     public void initDesktop(DesktopProvider provider) {
-//        gameLoop = new DesktopGameLoop(provider.getWidth(), provider.getHeight(), provider.getWindowImage(), provider.getWindowName());
-//        soundEngine = new DesktopSoundEngine();
-//        camera = new GengineCamera();
-//        input = new GengineDesktopInput();
+        gameLoop = new DesktopGameLoop(provider.getWidth(), provider.getHeight(), provider.getWindowImage(), provider.getWindowName());
+        soundEngine = new DesktopSoundEngine();
+        camera = new GengineCamera();
+        input = new GengineDesktopInput();
     }
 
     public void changeScreen(GengineScreen screen) { this.currentScreen = screen; }

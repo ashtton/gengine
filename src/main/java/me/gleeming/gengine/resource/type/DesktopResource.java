@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 public class DesktopResource extends Resource {
     private BufferedImage bufferedImage;
 
-    public DesktopResource(String path) { super(path); if(!path.startsWith("/")) path = "/" + path; try { this.bufferedImage = ImageIO.read(Gengine.getInstance().getClass().getResource(path)); } catch(Exception ex) { ex.printStackTrace(); System.out.println("[Gengine] There was an error while attempting to read a resource from '" + path + "'"); } }
+    public DesktopResource(String path) { super(path, true); if(!path.startsWith("/")) path = "/" + path; try { this.bufferedImage = ImageIO.read(Gengine.getInstance().getClass().getResource(path)); } catch(Exception ex) { ex.printStackTrace(); System.out.println("[Gengine] There was an error while attempting to read a resource from '" + path + "'"); } }
 
     public BufferedImage toBufferedImage() { return bufferedImage; }
 

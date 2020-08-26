@@ -13,6 +13,6 @@ public class CreateImageDesktop {
 
         if(color != null) graphics2D.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue()));
 
-        graphics2D.drawImage(((DesktopResource) resource).toBufferedImage(), x, y, width, height, null);
+        graphics2D.drawImage((resource.getDesktopResource()).toBufferedImage(), x, y, width, height, null);
     }
 }
