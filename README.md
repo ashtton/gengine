@@ -2,8 +2,8 @@
 
 **NOTICE:**\
 *Gengine is currently under heavy development, and even more features will be coming in the near future*\
-*Gengine is also currently a private library, requiring authentication to request from the maven repository.*\
-*If you are a game developer wishing to use **Gengine**, contact Gleeming#0001 on discord.*
+*Gengine's maven repository is currently private, If you are a game developer wishing to use **Gengine**, contact Gleeming#0001 on discord.*\
+*Gengin's android is also currently unusable, so for now Gengine is desktop only*\
 \
 \
 Welcome to [Gengine](http://github.com/GleemingKnight/gengine), a modern 2D game library supporting a multitude of features.\
@@ -40,15 +40,16 @@ repositories {
 compile(group: 'me.gleeming.gengine', name: 'gengine', version: '1.0-20200815.044625-1')
 ```
 \
+##### Desktop Tutorial
 \
 **Creating the main class**\
 The main class must extend ```Gengine2DGame```, within this class you will create your first screen.
 ```java
 public class TestGame extends Gengine2DGame {
     public TestGame() {
-        super("Test Game (1.0-SNAPSHOT)", width, height);
+        super(new DesktopProvider("Test Game (1.0-SNAPSHOT)", width, height));
         /* There is also a different super method, supporting a window icon. */
-        super("Test Game (1.0-SNAPSHOT)", new Resource("path-to-window-icon"), width, height);
+        super(new DesktopProvider("Test Game (1.0-SNAPSHOT)", width, height));
         
         /*
             The next step when creating a game using gengine, is to define the first screen.
@@ -150,11 +151,11 @@ Currently gengine supports .WAV and .MP3 files, although we are hoping to expand
 ```java
 /* You can add music to your game, that repeats on loop by using the following code */
 GengineSound backgroundMusic = new MP3GengineSound("path-to-mp3-music");
-GengineSoundEngine.getInstance().changeMainMusic(backgroundMusic);
+DesktopProvider.getSoundEngine().changeMainMusic(backgroundMusic);
 
 /* You can play a sound effect in your game by using the following code */
 GengineSound soundEffect = new WAVGengineSound("path-to-wav-sound");
-GengineSoundEngine.getInstance().playSoundEffect(soundEffect);
+DesktopProvider.getSoundEngine().playSoundEffect(soundEffect);
 
 /* You can also change the volume of a sound by using */
 backgroundMusic.setVolume(0.25f);
@@ -165,7 +166,7 @@ soundEffect.setVolume(0.5f);
 Gengine currently only supports one camera and one camera type for the sake of simplicity,
 although in the future we will be adding features to have more cameras.
 ```java
-GengineCamera camera = GengineCamera.getInstance();
+GengineCamera camera = DesktopProvider.getCamera();
 
 /* You can change the cameras position by using the following code */
 camera.changePosition(x, y);
@@ -256,4 +257,7 @@ if(rect1.colliding(rect2)) {
 ```
 \
 *These are all of the main features that gengine currently has*,\
-*this page will be updated when more compact and better features are added to gengine.*
+*this page will be updated when more compact and better features are added to gengine.*\
+
+##### Android/IOS/HTML Tutorial
+*Coming Soon*
