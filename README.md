@@ -2,8 +2,6 @@
 
 **NOTICE:**\
 *Gengine is currently under heavy development, and even more features will be coming in the near future*\
-*Gengine's maven repository is currently private, If you are a game developer wishing to use **Gengine**, contact Gleeming#0001 on discord.*\
-*Gengin's android is also currently unusable, so for now Gengine is desktop only*\
 \
 \
 Welcome to [Gengine](http://github.com/GleemingKnight/gengine), a modern 2D game library supporting a multitude of features.\
@@ -24,7 +22,7 @@ In order to use Gengine Maven, you must add our repository, then add the depende
 <dependency>
     <groupId>me.gleeming.gengine</groupId>
     <artifactId>gengine</artifactId>
-    <version>1.0-20200815.044625-1</version>
+    <version>LATEST</version>
 </dependency>
 ```
 \
