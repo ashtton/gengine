@@ -37,7 +37,6 @@ repositories {
 
 compile(group: 'me.gleeming.gengine', name: 'gengine', version: '1.0-20200815.044625-1')
 ```
-\
 ##### Desktop Tutorial
 \
 **Creating the main class**\
