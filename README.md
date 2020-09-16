@@ -36,7 +36,7 @@ repositories {
 
 compile(group: 'me.gleeming.gengine', name: 'gengine', version: '1.0-20200815.044625-1')
 ```
-##### Desktop Tutorial
+## Desktop Tutorial
 \
 **Creating the main class**\
 The main class must extend ```Gengine2DGame```, within this class you will create your first screen.
@@ -255,5 +255,5 @@ if(rect1.colliding(rect2)) {
 *These are all of the main features that gengine currently has*,\
 *this page will be updated when more compact and better features are added to gengine.*\
 
-##### Android/IOS/HTML Tutorial
+## Android/IOS/HTML Tutorial
 *Coming Soon*
