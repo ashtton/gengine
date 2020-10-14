@@ -56,5 +56,8 @@ public class Gengine {
         input = new GengineDesktopInput();
     }
 
-    public void changeScreen(GengineScreen screen) { this.currentScreen = screen; }
+    public void changeScreen(GengineScreen screen) {
+        this.currentScreen = screen;
+        DesktopProvider.getGameLoop().removeAll();
+    }
 }

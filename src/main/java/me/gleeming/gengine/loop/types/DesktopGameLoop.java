@@ -10,7 +10,10 @@ import me.gleeming.gengine.math.Rectangle;
 import me.gleeming.gengine.resource.type.DesktopResource;
 import me.gleeming.gengine.screen.menu.MenuScreen;
 import me.gleeming.gengine.screen.menu.button.Button;
+import me.gleeming.gengine.screen.menu.text.TextController;
+import me.gleeming.gengine.screen.menu.text.entry.TextEntry;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -85,9 +88,24 @@ public class DesktopGameLoop extends Frame implements MouseListener, MouseMotion
 
     public void mousePressed(MouseEvent e) {
         if(Gengine.getInstance().getCurrentScreen() != null && Gengine.getInstance().getCurrentScreen() instanceof MenuScreen) {
+            MenuScreen menuScreen = (MenuScreen) Gengine.getInstance().getCurrentScreen();
             Rectangle mouseRect = new Rectangle(e.getX(), e.getY(), 5, 5);
             for (Button button : ((MenuScreen) Gengine.getInstance().getCurrentScreen()).getButtons()) {
                 if(button.getRectangle().colliding(mouseRect)) for (Button.Listener listener : button.getListeners()) listener.buttonClick();
+            }
+
+            for (TextController textController : menuScreen.getTextControllers()) {
+                boolean selected = false;
+                for(TextEntry entry : textController.getEntries()) {
+                    if(entry.getRectangle().colliding(mouseRect)) {
+                        textController.setSelectedEntry(entry);
+                        selected = true;
+
+                        break;
+                    }
+                }
+
+                if(!selected) textController.setSelectedEntry(null);
             }
         }
 
@@ -130,5 +148,16 @@ public class DesktopGameLoop extends Frame implements MouseListener, MouseMotion
     public void mouseClicked(MouseEvent e) { }
     public void mouseEntered(MouseEvent e) { }
     public void mouseExited(MouseEvent e) { }
-    public void keyTyped(KeyEvent e) { }
+    public void keyTyped(KeyEvent e) {
+        if(Gengine.getInstance().getCurrentScreen() != null && Gengine.getInstance().getCurrentScreen() instanceof MenuScreen) {
+            MenuScreen menuScreen = (MenuScreen) Gengine.getInstance().getCurrentScreen();
+
+            for (TextController textController : menuScreen.getTextControllers()) {
+                if(textController.getSelectedEntry() != null) {
+                    textController.getSelectedEntry().setText(textController.getSelectedEntry().getText() + String.valueOf(e.getKeyChar()));
+                }
+            }
+        }
+
+    }
 }
