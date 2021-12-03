@@ -8,34 +8,6 @@ Welcome to [Gengine](http://github.com/GleemingKnight/gengine), a modern 2D game
 Gengine was made by game developers for game developers, which means it has all the features you wish other frameworks had,
 without the features you wish they didn't have. Gengine is made of pure java, not using any build libraries, which makes it extremely lightweight.\
 \
-**Setting up your project**\
-\
-*Maven*\
-In order to use Gengine Maven, you must add our repository, then add the dependency in your **pom.xml**
-```xml
-<repository>
-    <id>athen-repo</id>
-    <url>http://athen.cc:8082/artifactory/libs-release/</url>
-</repository>
-
-<dependency>
-    <groupId>me.gleeming.gengine</groupId>
-    <artifactId>gengine</artifactId>
-    <version>LATEST</version>
-</dependency>
-```
-\
-*Gradle*\
-In order to use Gengine Gradle, you must add our repository, then add the dependency in your **build.gradle**
-```gradle
-repositories {
-    maven {
-        url "http://athen.cc:8082/artifactory/libs-release/"
-    }
-}
-
-compile(group: 'me.gleeming.gengine', name: 'gengine', version: '1.0-20200815.044625-1')
-```
 ## Desktop Tutorial
 \
 **Creating the main class**\
